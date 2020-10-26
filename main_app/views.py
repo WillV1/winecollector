@@ -14,5 +14,6 @@ def wines_index(request):
     wines = Wine.objects.all()
     return render(request, 'wines/index.html', {'wines': wines})
 
-# def wines_about(request):
-#     return render(request, 'wines/about.html')
+def wines_details(request, wine_id):
+    wine = Wine.objects.get(id=wine_id)
+    return render(request, 'wines/detail.html', {'wine': wine})
