@@ -1,6 +1,5 @@
-from django.shortcuts import render 
-# from .models import Producer
-# from .models import Wine
+from django.shortcuts import render, redirect 
+from .models import Producer
 
 # Create your views here.
 
@@ -11,18 +10,24 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-# def producers_index(request):
-#     producers = Producer.objects.all()
-#     return render(request, 'producers/index.html', {'producers': producers})
+def producers_index(request):
+    producers = Producer.objects.all()
+    return render(request, 'producers/index.html', {'producers': producers})
 
-# def producers_details(request, wine_id):
-#     producer = Producer.objects.get(id=producer_id)
-#     return render(request, 'producers/detail.html', {'producer': producer})
+def producers_details(request, producer_id):
+    producer = Producer.objects.get(id=producer_id)
+    wine_form = WineForm()
+    return render(request, 'producers/detail.html', {
+        'producer': producer,
+        'wine_form': wine_form
+        })
 
-# def wines_index(request):
-#     wines = Wine.objects.all()
-#     return render(request, 'wines/index.html', {'wines': wines})
+def add_wine(request, producer_id):
+    form = WineForm(request.POST)
 
-# def wines_details(request, wine_id):
-#     wine = Wine.objects.get(id=wine_id)
-#     return render(request, 'wines/detail.html', {'wine': wine})
+    if form.is_valid():
+        new_wine = form.save(commit=False)
+        new_wine.producer_id = producer_id
+        new_wine.save()
+
+    return redirect('detail', producer_id=producer_id)

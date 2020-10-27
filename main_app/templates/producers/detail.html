@@ -8,12 +8,38 @@ Producer Details
 
 <h2>{{producer.name}}</h2>
 
-<div class="card">
-    <div class="card-content">
-      <p>Country: {{producer.country}}</p>
-      <p>Region: {{ producer.region }}</p>
-      <p>Description: {{ producer.description }}</p>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <p>Country: {{producer.country}}</p>
+        <p>Region: {{ producer.region }}</p>
+        <p>Description: {{ producer.description }}</p>
+      </div>
     </div>
   </div>
+  <div class="col s6">
+    <form action="{% url 'add_wine' producer.id %}" method="post">
+      {% csrf_token %}
+      {{ wine_form.as_p }}
+      <input type="submit" class="btn" value="Add Wine">
+    </form>
+    <table class="striped">
+      <thead>
+        <tr><th>Name</th><th>Size(mL)</th><th>Price($)/Bottle</th></tr>
+      </thead>
+      <tbody>
+        {% for wine in producer.wine_set.all %}
+          <tr>
+            <td>{{wine.name}}</td>
+            <td>{{wine.size}}</td>
+            <td>{{wine.price}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 {% endblock %}
