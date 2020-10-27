@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'winecollector_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'winecollector',
+        'NAME': 'producer',
     }
 }
 

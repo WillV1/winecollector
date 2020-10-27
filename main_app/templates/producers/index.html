@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Producer List
+{% endblock %}
+
+{% block content %}
+
+<h1>Producers List</h1>
+
+{% for producer in producers %}
+  <div class="card">
+    <a href="{% url 'producers_details' producer.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ producer.name }}</span>
+        <p>Country: {{producer.country}}</p>
+        <p>Region: {{ producer.region }}</p>
+        <p>Grape/Blend: {{producer.grape}}</p>
+      </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}

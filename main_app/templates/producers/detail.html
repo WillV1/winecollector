@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Producer Details
+{% endblock %}
+
+{% block content %}
+
+<h2>{{producer.name}}</h2>
+
+<div class="card">
+    <div class="card-content">
+      <p>Country: {{producer.country}}</p>
+      <p>Region: {{ producer.region }}</p>
+      <p>Description: {{ producer.description }}</p>
+    </div>
+  </div>
+
+{% endblock %}
