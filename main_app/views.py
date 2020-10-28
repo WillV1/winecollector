@@ -39,3 +39,7 @@ def assoc_distributor(request, producer_id, distributor_id):
     # Note that you can pass a toy's id instead of the whole object
     Producer.objects.get(id=producer_id).distributors.add(distributor_id)
     return redirect('producers_details', producer_id=producer_id)
+
+def remove_distributor(request, producer_id, distributor_id):
+    Producer.objects.get(id=producer_id).distributors.remove(distributor_id)
+    return redirect('producers_details', producer_id=producer_id)
