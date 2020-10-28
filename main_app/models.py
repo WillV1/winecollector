@@ -1,12 +1,21 @@
 from django.db import models
 
 # Create your models here.
+class Distributor(models.Model):
+    name = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    website = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class Producer(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
     grape = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
+    distributors = models.ManyToManyField(Distributor)
 
     def __str__(self):
         return self.name

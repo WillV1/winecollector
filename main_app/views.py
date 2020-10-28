@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect 
 from .models import Producer
+from .forms import WineForm
 
 # Create your views here.
 
@@ -30,4 +31,4 @@ def add_wine(request, producer_id):
         new_wine.producer_id = producer_id
         new_wine.save()
 
-    return redirect('detail', producer_id=producer_id)
+    return redirect('producers_details', producer_id)
