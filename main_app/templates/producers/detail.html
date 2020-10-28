@@ -40,6 +40,47 @@ Producer Details
     </table>
   </div>
 </div>
-
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ producer.name }}'s Distributors</h3>
+    {% if producer.distributors.count %}
+      {% for distributor in producer.distributors.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{distributor.name}}
+            </span>
+            <p>Country: {{distributor.country}}</p>
+            <p>Website: {{ distributor.website }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Distributors Listed</h5>
+    {% endif %}
+  </div>
+  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Available Distributors</h3>
+    {% if distributors.count %}
+      {% for distributor in distributors.all %}
+        <div class="card">
+          <div class="card-content">
+            <p>Distributor: {{distributor.name}}</p>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_distributor' producer.id distributor.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Distributors to Add</h5>
+    {% endif %}
+  </div>
+</div>
 
 {% endblock %}

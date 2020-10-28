@@ -5,3 +5,4 @@ class WineForm(forms.ModelForm):
   class Meta:
     model = Wine
     fields = ['name', 'size', 'price']
+
