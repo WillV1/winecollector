@@ -40,6 +40,24 @@ def add_producer(request):
         context = {'form': form}
         return render(request, 'producers/new.html', context)
 
+def delete_producer(request, producer_id):
+    Producer.objects.get(id=producer_id).delete()
+
+    return redirect('producers_index')
+
+def edit_producer(request, producer_id):
+    producer = Producer.objects.get(id=producer_id)
+
+    if request.method == 'POST':
+        producer_form = ProducerForm(request.POST, instance=producer)
+        if producer_form.is_valid():
+            updated_producer = producer_form.save()
+            return redirect('producers_detail', updated_producer.id)
+    else: 
+        form = ProducerForm(instance=cat)
+        context = {'form': form}
+        return render(request, 'producers/edit.html', context)
+
 
 #-----ADD WINE
 

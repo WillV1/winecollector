@@ -12,6 +12,8 @@ urlpatterns = [
     path('producers/', views.producers_index, name='producers_index'),
     path('producers/<int:producer_id>', views.producers_details, name='producers_details'),
     path('producer/new/', views.add_producer, name='add_producer'),
+    path('producers/<int:producer_id>/delete/', views.delete_producer, name='delete_producer'),
+    path('producers/<int:producer_id>/edit/', views.edit_producer, name='edit_producer'),
 
     #---WINE
     path('producers/<int:producer_id>/add_wine/', views.add_wine, name='add_wine'),

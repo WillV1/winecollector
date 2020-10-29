@@ -11,13 +11,24 @@ Producer Details
 <div class="row">
   <div class="col s6">
     <div class="card">
+      <!-- Information card -->
       <div class="card-content">
         <p>Country: {{producer.country}}</p>
         <p>Region: {{ producer.region }}</p>
         <p>Description: {{ producer.description }}</p>
       </div>
+      <!-- Edit and Delete -->
+      <div class="card-action">
+        <a href="{% url 'delete_producer' producer.id %}" type="submit" class="btn-small red">
+          Delete
+        </a>
+        <a href="{% url 'edit_producer' producer.id %}" type="submit" class="btn-small">
+          Edit
+        </a>
+      </div>
     </div>
   </div>
+  <!-- Add new wine -->
   <div class="col s6">
     <form action="{% url 'add_wine' producer.id %}" method="post">
       {% csrf_token %}
@@ -41,6 +52,7 @@ Producer Details
   </div>
 </div>
 <hr>
+<!-- Distributors -->
 <div class="row">
   <div class="col s6">
     <h3>{{ producer.name }}'s Distributors</h3>
