@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Add A New Producer</h1>
+
+  <form action="{% url 'add_producer' %}" method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button class='btn' type='submit'>Add Producer</button>
+  </form>
+
+{% endblock %}

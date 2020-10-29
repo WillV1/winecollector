@@ -18,8 +18,9 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;The Wine Collector</a></li>
         </ul>
         <ul class="right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/producers">Producers</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'add_producer' %}">Add A Producer</a></li>
+          <li><a href="{% url 'producers_index' %}">Producers</a></li>
         </ul>
       </div>
     </nav>

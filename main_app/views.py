@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect 
 from .models import Producer, Distributor
-from .forms import WineForm
+from .forms import WineForm, ProducerForm
 
 # Create your views here.
 
+#-------STATIC
 
 def home(request):
     return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
+
+#------PRODUCERS
 
 def producers_index(request):
     producers = Producer.objects.all()
@@ -25,6 +28,21 @@ def producers_details(request, producer_id):
         'distributors': available_distributors
         })
 
+def add_producer(request):
+    if request.method == 'POST':
+        producer_form = ProducerForm(request.POST)
+        if producer_form.is_valid():
+            new_producer = producer_form.save(commit=False)
+            new_producer.save()
+            return redirect('producers_details', new_producer.id)
+    else: 
+        form = ProducerForm()
+        context = {'form': form}
+        return render(request, 'producers/new.html', context)
+
+
+#-----ADD WINE
+
 def add_wine(request, producer_id):
     form = WineForm(request.POST)
 
@@ -34,6 +52,8 @@ def add_wine(request, producer_id):
         new_wine.save()
 
     return redirect('producers_details', producer_id)
+
+#------DISTRIBUTOR
 
 def assoc_distributor(request, producer_id, distributor_id):
     # Note that you can pass a toy's id instead of the whole object
