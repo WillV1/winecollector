@@ -22,6 +22,7 @@ urlpatterns = [
     path('producers/<int:producer_id>/add_wine/', views.add_wine, name='add_wine'),
 
     #----DISTRIBUTORS
+    path('distributor/new/', views.add_distributor, name='add_distributor'),
     path('producers/<int:producer_id>/assoc_distributor/<int:distributor_id>/', views.assoc_distributor, name='assoc_distributor'),
     path('producers/<int:producer_id>/remove_distributor/<int:distributor_id>/', views.remove_distributor, name='remove_distributor')
 ]

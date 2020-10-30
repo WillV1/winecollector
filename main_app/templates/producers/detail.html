@@ -114,7 +114,10 @@ Producer Details
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Distributors to Add</h5>
+      <h5>No Distributors to Select</h5>
+      <a href="{% url 'add_distributor' %}" type="submit" class="btn-small">
+        Add A Distributor
+      </a>
     {% endif %}
   </div>
 </div>

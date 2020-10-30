@@ -1,4 +1,4 @@
-
+# from .secrets import *
 
 """
 Django settings for winecollector_project project.

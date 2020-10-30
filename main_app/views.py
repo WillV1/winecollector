@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect 
 from .models import Producer, Distributor
-from .forms import WineForm, ProducerForm
+from .forms import WineForm, ProducerForm, DistributorForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -107,6 +107,19 @@ def add_wine(request, producer_id):
     return redirect('producers_details', producer_id)
 
 #------DISTRIBUTOR
+
+@login_required
+def add_distributor(request):
+    if request.method == 'POST':
+        distributor_form = DistributorForm(request.POST)
+        if distributor_form.is_valid():
+            new_distributor = distributor_form.save(commit=False)
+            new_distributor.save()
+            return redirect('producers_index')
+    else: 
+        form = DistributorForm()
+        context = {'form': form}
+        return render(request, 'distributors/new.html', context)
 
 @login_required
 def assoc_distributor(request, producer_id, distributor_id):
