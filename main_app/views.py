@@ -52,9 +52,9 @@ def edit_producer(request, producer_id):
         producer_form = ProducerForm(request.POST, instance=producer)
         if producer_form.is_valid():
             updated_producer = producer_form.save()
-            return redirect('producers_detail', updated_producer.id)
+            return redirect('producers_details', updated_producer.id)
     else: 
-        form = ProducerForm(instance=cat)
+        form = ProducerForm(instance=producer)
         context = {'form': form}
         return render(request, 'producers/edit.html', context)
 
