@@ -15,13 +15,31 @@ Producer Details
       <div class="card-content">
         <p>Country: {{producer.country}}</p>
         <p>Region: {{ producer.region }}</p>
+        <p>Grape/Blend: {{ producer.grape }}</p>
         <p>Description: {{ producer.description }}</p>
       </div>
       <!-- Edit and Delete -->
       <div class="card-action">
-        <a href="{% url 'delete_producer' producer.id %}" type="submit" class="btn-small red">
+        <!-- <a href="{% url 'delete_producer' producer.id %}" type="submit" class="confirm-delete btn-small red">
+          Delete
+        </a> -->
+        <!-- Modal Trigger -->
+        <a href="#modal1" class="btn-small modal-trigger red">
           Delete
         </a>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Delete Producer Confirmation</h4>
+            <p>Are you sure you want to delete?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="{% url 'delete_producer' producer.id %}" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </div>
+
         <a href="{% url 'edit_producer' producer.id %}" type="submit" class="btn-small">
           Edit
         </a>
@@ -101,4 +119,10 @@ Producer Details
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('.modal');
+    const instances = M.Modal.init(elems);
+  });
+</script>
 {% endblock %}
