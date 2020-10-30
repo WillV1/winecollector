@@ -8,6 +8,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
 
+    #-----AUTHENTICATION
+    path('accounts/signup', views.signup, name='signup'),
+
     #---PRODUCERS
     path('producers/', views.producers_index, name='producers_index'),
     path('producers/<int:producer_id>', views.producers_details, name='producers_details'),

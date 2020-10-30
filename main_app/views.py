@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect 
 from .models import Producer, Distributor
 from .forms import WineForm, ProducerForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -12,11 +14,36 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+#-------SIGNUP
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('producers_index')
+    else: 
+        error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
+
 #------PRODUCERS
 
 def producers_index(request):
+    if request.method == 'POST':
+        producer_form = ProducerForm(request.POST)
+        if producer_form.is_valid():
+            new_producer = produceer_form.save(commit=False)
+            new_producer.user = request.user
+            new_producer.save()
+            return redirect('prodcuers_index')
     producers = Producer.objects.all()
-    return render(request, 'producers/index.html', {'producers': producers})
+    producer_form = ProducerForm()
+    context = {'producers': producers, 'producer_form': producer_form}
+    return render(request, 'producers/index.html', context)
 
 def producers_details(request, producer_id):
     producer = Producer.objects.get(id=producer_id)
