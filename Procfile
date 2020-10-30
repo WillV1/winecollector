@@ -1,0 +1,1 @@
+web: gunicorn winecollector_project.wsgi
