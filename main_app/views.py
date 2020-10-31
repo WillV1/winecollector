@@ -28,7 +28,7 @@ def signup(request):
             user = form.save()
             # This is how we log a user in via code
             login(request, user)
-            return redirect('cats_index')
+            return redirect('producers_index')
         else:
             error_message = 'Invalid sign up - try again'
     # A GET or a bad POST request, so render signup.html with an empty form
